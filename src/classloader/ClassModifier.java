@@ -38,13 +38,18 @@ public class ClassModifier {
     }
 
     /**
-    * @Description  修改常量中CONSTANT_UTF8_INFO常量的内容
+    * @Description  修改常量池中CONSTANT_UTF8_INFO常量的内容
     * @Param  oldString 修改前的字符串
     * @Param  newString 修改后的字符串
     * @return  修改结果
     */
     public byte[] modifyUTF8Constant (String oldString, String newString){
         int cpc = getConstantPoolCount();
+        int offest = CONSTANT_POOL_COUNT_INDEX + U2;
+        for(int i = 0; i < cpc; i++){
+            int tag = ByteUtils.bytes2Int(classByte, offest + U1, U2);
+
+        }
         return classByte;
     }
 
