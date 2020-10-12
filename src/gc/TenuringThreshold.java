@@ -1,4 +1,4 @@
-package GC;
+package gc;
 
 public class TenuringThreshold {
     private static final int _1MB  = 1024 * 1024;

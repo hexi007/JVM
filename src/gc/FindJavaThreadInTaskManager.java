@@ -1,4 +1,4 @@
-package GC;
+package gc;
 
 public class FindJavaThreadInTaskManager {
     public static void main(String[] args) {

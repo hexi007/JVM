@@ -1,4 +1,4 @@
-package GC;
+package gc;
 
 public class Allocation {
 

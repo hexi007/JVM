@@ -1,4 +1,4 @@
-package GC;
+package gc;
 
 public class DeadLockTest {
     //线程死锁等待演示

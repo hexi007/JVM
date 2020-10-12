@@ -1,4 +1,4 @@
-package JvmSubsystem;
+package jvmsubsystem;
 
 class SuperClass {
     public static int value = 123;

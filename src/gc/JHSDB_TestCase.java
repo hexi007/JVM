@@ -1,4 +1,4 @@
-package GC;
+package gc;
 
 public class JHSDB_TestCase {
     static class Test {
