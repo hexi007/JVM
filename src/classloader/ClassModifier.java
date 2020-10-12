@@ -1,0 +1,58 @@
+package classloader;
+
+/**
+ * @author 27771
+ * @description 将java.lang.System替换为我们自己定义的HackSystem类，暂时只提供修改常量池的功能
+ * @create 2020-10-12 21:06
+ **/
+public class ClassModifier {
+
+    /**
+    * CONSTANT_POOL_COUNT_INDEX Class: 文件中常量池的起始偏移，8个字节
+    */
+    private static final int CONSTANT_POOL_COUNT_INDEX = 8;
+
+    /**
+     * CONSTANT_Utf8_info: 常量的tag标志
+     */
+    private static final int CONSTANT_UTF8_INFO = 1;
+
+    /**
+     * CONSTANT_ITEM_LENGTH: 常量池11种变量所占长度，CONSTANT_UTF8_INFO除外，因为它不定长
+     */
+    private static final int[] CONSTANT_ITEM_LENGTH = {-1, -1, -1, 5, 5, 9, 9 , 3, 3 ,5, 5, 5 ,5};
+
+    /**
+     * U1表示占一个字节，U1表示占两个字节
+     */
+    private static final int U1 = 1;
+    private static final int U2 = 2;
+
+    /**
+     * classByte: 字节数组
+     */
+    private byte[] classByte;
+
+    public ClassModifier(byte[] classByte) {
+        this.classByte = classByte;
+    }
+
+    /**
+    * @Description  修改常量中CONSTANT_UTF8_INFO常量的内容
+    * @Param  oldString 修改前的字符串
+    * @Param  newString 修改后的字符串
+    * @return  修改结果
+    */
+    public byte[] modifyUTF8Constant (String oldString, String newString){
+        int cpc = getConstantPoolCount();
+        return classByte;
+    }
+
+    /**
+     * 获取常量池中常量的数量
+     * @return 常量池数量
+     */
+    private int getConstantPoolCount() {
+        return ByteUtils.bytes2Int(classByte, CONSTANT_POOL_COUNT_INDEX, U2);
+    }
+}
