@@ -1,7 +1,9 @@
 package JvmSubsystem;
 
 import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
+import java.lang.reflect.Field;
 
 import static java.lang.invoke.MethodHandles.lookup;
 
@@ -12,14 +14,14 @@ import static java.lang.invoke.MethodHandles.lookup;
 public class MethodHandleSon {
 
     static class Grandfather {
-        void talking () {
+        void talking () throws Throwable {
             System.out.println("I'm grandfather.");
         }
     }
 
     static class Father extends Grandfather {
         @Override
-        void talking () {
+        void talking () throws Throwable {
             System.out.println("I'm father.");
         }
     }
@@ -39,7 +41,21 @@ public class MethodHandleSon {
         }
     }
 
-    public static void main(String[] args) {
+    static class NewSon extends Father {
+        @Override
+        void talking() throws Throwable {
+            MethodType mt = MethodType.methodType(void.class);
+            Field lookupImpl = MethodHandles.Lookup.class.getDeclaredField("IMPL_LOOKUP");
+            lookupImpl.setAccessible(true);
+            MethodHandle mh = ((MethodHandles.Lookup)lookupImpl.get(null) ).findSpecial(
+                    Grandfather.class,"talking",mt,getClass());
+            mh.invoke(this);
+        }
+    }
+
+    public static void main(String[] args) throws Throwable {
+
         (new Son()).talking();
+        (new NewSon()).talking();
     }
 }
