@@ -23,7 +23,9 @@ public class GenericsErasure {
         map.put("how are u?", "I'm fine");
         System.out.println(map.get("hello"));
         System.out.println(map.get("how are u?"));
+
     }
+
     public static void main(String[] args) {
         basicGenericsErasureTest();
     }
