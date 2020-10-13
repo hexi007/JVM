@@ -1,6 +1,7 @@
 package compilationandprogramoptimization;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +26,18 @@ public class GenericsErasure {
         System.out.println(map.get("how are u?"));
 
     }
+
+    /**
+     * 被注释内容无法编译运行，因为参数List<String> list和List<Integer> list编译之后被擦除了
+     * 变成了同一种裸类型List，因而两个方法特征签名变得一模一样，所以无法重载
+    public static void method(List<String> list){
+        System.out.println("invoke method(List<String> list)");
+    }
+
+    public static void method(List<Integer> list){
+        System.out.println("invoke method(List<String> Integer)");
+    }
+    */
 
     public static void main(String[] args) {
         basicGenericsErasureTest();
