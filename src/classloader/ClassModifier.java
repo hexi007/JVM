@@ -43,12 +43,27 @@ public class ClassModifier {
     * @Param  newString 修改后的字符串
     * @return  修改结果
     */
-    public byte[] modifyUTF8Constant (String oldString, String newString){
+    public byte[] modifyUTF8Constant (String oldStr, String newStr){
         int cpc = getConstantPoolCount();
-        int offest = CONSTANT_POOL_COUNT_INDEX + U2;
+        int offset = CONSTANT_POOL_COUNT_INDEX + U2;
         for(int i = 0; i < cpc; i++){
-            int tag = ByteUtils.bytes2Int(classByte, offest + U1, U2);
-
+            int tag = ByteUtils.bytes2Int(classByte, offset , U1);
+            if(tag == CONSTANT_UTF8_INFO) {
+                int len = ByteUtils.bytes2Int(classByte, offset + U1 , U2);
+                offset += (U1 + U2);
+                String str = ByteUtils.bytes2String(classByte, offset, len);
+                if(str.equalsIgnoreCase(oldStr)){
+                    byte[] strBytes = ByteUtils.string2Bytes(newStr);
+                    byte[] strLen = ByteUtils.int2Bytes(newStr.length(), U2);
+                    classByte = ByteUtils.bytesReplace(classByte, offset - U2, U2, strLen);
+                    classByte = ByteUtils.bytesReplace(classByte, offset, len, strBytes);
+                    return classByte;
+                } else {
+                    offset += len;
+                }
+            } else {
+                offset += CONSTANT_ITEM_LENGTH[tag];
+            }
         }
         return classByte;
     }
