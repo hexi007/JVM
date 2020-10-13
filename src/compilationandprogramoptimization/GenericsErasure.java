@@ -28,7 +28,7 @@ public class GenericsErasure {
     }
 
     /**
-     * 被注释内容无法编译运行，因为参数List<String> list和List<Integer> list编译之后被擦除了
+     * 被注释程序无法编译运行，因为参数List<String> list和List<Integer> list编译之后被擦除了
      * 变成了同一种裸类型List，因而两个方法特征签名变得一模一样，所以无法重载
     public static void method(List<String> list){
         System.out.println("invoke method(List<String> list)");
@@ -37,7 +37,20 @@ public class GenericsErasure {
     public static void method(List<Integer> list){
         System.out.println("invoke method(List<String> Integer)");
     }
-    */
+     */
+
+    /**
+     * 泛型擦除之后，即使返回值不同，依然不能重载
+    public static String method(List<Integer> list){
+        System.out.println("invoke method(List<String> list)");
+        return "";
+    }
+
+    public static int method(List<Integer> list){
+        System.out.println("invoke method(List<Integer> list)");
+        return 1;
+    }
+     */
 
     public static void main(String[] args) {
         basicGenericsErasureTest();
