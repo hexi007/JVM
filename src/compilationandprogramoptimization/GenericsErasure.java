@@ -11,7 +11,7 @@ import java.util.Map;
 public class GenericsErasure {
 
     /**
-     * 泛型擦除后23，24行反编译如下
+     * 泛型擦除后24，25行反编译如下
      * System.out.println((String)map.get("hello"));
      * System.out.println((String)map.get("how are u?"));
      * 元素访问时插入了从Object到String的强制类型转换
