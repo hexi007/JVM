@@ -1,17 +1,24 @@
 package concurrentprogramming;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
- * description volatile变量自增运算测试
+ * description volatile,AtomicInteger变量自增运算测试
  *
  * @author 27771
  * create 2020-10-16 15:02
  **/
 public class VolatileTest {
 
+    /**
+    *
     public static volatile int race = 0;
+    *
+    */
+    public static AtomicInteger race = new AtomicInteger(0);
 
-    public static void increase(){
-        race++;
+    public static  void increase(){
+        race.incrementAndGet();
     }
 
     private static final int THREADS_COUNT = 20;
